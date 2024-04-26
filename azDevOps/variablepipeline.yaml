@@ -1,0 +1,38 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+ 
+trigger:
+- master
+ 
+pool:
+  vmImage: ubuntu-latest
+ 
+parameters:
+  - name: projectname
+    displayName: Please provide name of the project
+    type: string
+    
+steps:
+- script: echo Hello, world!
+  name: 'sample'
+  displayName: 'sample one'
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo $(name)               #from local pipeline variable
+      echo $(password)           #from variable group
+      echo $(nametest)           #from variable group- unsecured
+      echo $(System.DefaultWorkingDirectory)
+      
+      echo Hello world
+  displayName: 'Run a one-line script'
+ 
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+ 
+YAML schema reference
+Azure Pipelines YAML schema reference
